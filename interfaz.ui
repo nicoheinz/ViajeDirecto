@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Interfaz</class>
+ <widget class="QWidget" name="Interfaz">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>253</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Interfaz</string>
+  </property>
+  <widget class="Boton" name="Boton1" native="true">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>320</y>
+     <width>60</width>
+     <height>84</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Mapa" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>231</width>
+     <height>391</height>
+    </rect>
+   </property>
+  </widget>
+  <zorder>widget</zorder>
+  <zorder>Boton1</zorder>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Boton</class>
+   <extends>QWidget</extends>
+   <header>boton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Mapa</class>
+   <extends>QWidget</extends>
+   <header location="global">mapa.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

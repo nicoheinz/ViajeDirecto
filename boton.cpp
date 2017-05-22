@@ -9,7 +9,7 @@ Boton::Boton(QWidget *parent) :
     ui(new Ui::Boton)
 {
     ui->setupUi(this);
-    im1.load("../ViajeDirecto/escudo.jpg");
+    im1.load("../ViajeDirecto/escudo.png");
 
     if(im1.isNull())
         printf("La imagen no se cargo");

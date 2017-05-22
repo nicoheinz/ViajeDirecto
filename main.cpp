@@ -1,18 +1,20 @@
-#include "interfaz.h"
-#include "boton.h"
-#include "mapa.h"
+#include "posicion.h"
+#include "posmanager.h"
+#include "myclass.h"
 #include <QApplication>
+#include "myclass.h"
 #include <QNetworkProxyFactory>
-
-
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QNetworkProxyFactory::setUseSystemConfiguration(true);
-    Interfaz w;
-    Boton setMouseTracking(bool enable);
+    Posicion w;
     w.show();
+    PosManager pm;
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
+
+    QObject::connect(&w,SIGNAL(signal_coordenadas(float,float)),&pm,SLOT(pedirDomicilio(float,float)));
+    QObject::connect(&w,SIGNAL(signal_coordenadas(float,float)),&pm,SLOT(getDomicilioActual(float,float)));
+    QObject::connect(&pm,SIGNAL(signal_domicilioObtenido(QString)),&w,SLOT(slot_setLineEdit(QString)));
 
     return a.exec();
 }

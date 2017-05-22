@@ -84,3 +84,4 @@ void PosManager::pedirDomicilio(float ll, float lg)
 
         manager->get(QNetworkRequest(QUrl("https://maps.googleapis.com/maps/api/geocode/xml?latlng=" + a + "," + b+ "&key=AIzaSyAiMFncByo2gYEkkUepKtVFsXLOZIu6TIw")));
 }
+

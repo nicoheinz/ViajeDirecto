@@ -3,26 +3,27 @@
 
 #include <QWidget>
 #include <QImage>
+#include <QPainter>
 #include <QPaintEvent>
+#include <QWidget>
 
-namespace Ui {
+namespace Ui{
 class Mapa;
 }
-
 class Mapa : public QWidget
 {
     Q_OBJECT
+    QImage im;
+
+    void paintEvent(QPaintEvent *);
 
 public:
-    explicit Mapa(QWidget *parent = 0);
-    ~Mapa();
-    void paintEvent(QPaintEvent *);
-    void ubicacion();
 
+    explicit Mapa(QWidget *parent = 0);
+    void setMapa(QImage im);
 
 private:
     Ui::Mapa *ui;
-    QImage imMapa;
 };
 
 #endif // MAPA_H

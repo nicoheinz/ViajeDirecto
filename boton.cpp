@@ -2,23 +2,21 @@
 #include "ui_boton.h"
 #include <QPainter>
 #include <QColor>
-
+#include <QDebug>
 
 Boton::Boton(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Boton)
 {
     ui->setupUi(this);
-    im1.load("../ViajeDirecto/escudo.jpg");
+    im1.load("../ViajeDirecto-master/escudo.png");
 
     if(im1.isNull())
         printf("La imagen no se cargo");
     else
         printf("La imagen se carga");
 
-    this->repaint();
-
-
+    qDebug()<<"botonnn";
 }
 
 Boton::~Boton()

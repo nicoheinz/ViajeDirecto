@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     QObject::connect(&w,SIGNAL(signal_coordenadas(float,float)),&pm,SLOT(pedirDomicilio(float,float)));
-    QObject::connect(&w,SIGNAL(signal_coordenadas(float,float)),&pm,SLOT(getDomicilioActual(float,float)));
+    QObject::connect(&pm,SIGNAL(signal_domicilioObtenido(QString)),&w,SLOT(direccionLista(QString)));
     QObject::connect(&pm,SIGNAL(signal_domicilioObtenido(QString)),&w,SLOT(slot_setLineEdit(QString)));
 
     return a.exec();

@@ -7,82 +7,53 @@ Posicion::Posicion(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    pm = new PosManager;
-    manager = new QNetworkAccessManager;
-    mapas = new Mapas;
+    posManager = new PosManagerV2;
+//    QStringList list = posManager->getLatLongGPS();
+//    QString a = posManager->getLatLongGPS().at(0);
+//    QString b = posManager->getLatLongGPS().at(1);
 
-    connect(manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(slot_procesarRespuesta(QNetworkReply *)));
-    connect(ui->leDomicilio, SIGNAL(returnPressed()), this, SLOT(slot_buscarMapa()));
-    connect(ui->pbActualizar, SIGNAL(clicked()), this, SLOT(slot_buscarMapa()));
-    connect(ui->pbGets, SIGNAL(clicked()), this, SLOT(qDebug_gets()));
+//    float latitud = a.toFloat();
+//    float longuitud = a.toFloat();
 
-    QGeoPositionInfoSource *source = QGeoPositionInfoSource::createDefaultSource(this);
-    if (source) {
-        connect(source, SIGNAL(positionUpdated(QGeoPositionInfo)),
-                this, SLOT(positionUpdated(QGeoPositionInfo)));
-        source->startUpdates();
-    }
+    connect(ui->pbActualizar,SIGNAL(clicked(bool)),this,SLOT(actualizarPosicion()));
 
-    alt = -31.4207166;
-    lon = -64.1833505;
+    connect(posManager,SIGNAL(signal_domicilioObtenido(QString)),this,SLOT(setLineEdit(QString)));
+
+    //Aca se setea si vamos a utilizar el gps de un celular o vamos a enviar latitud y longuitud manualmente
+    dsk = false;
 }
 
 Posicion::~Posicion()
 {
     delete ui;
 }
-void Posicion::positionUpdated(const QGeoPositionInfo &info)
+
+void Posicion::setLineEdit(QString dom)
 {
-//    alt=info.coordinate().latitude();
-//    lon=info.coordinate().longitude();
-
-
-    alt = -31.4207166;
-    lon = -64.1833505;
+    qDebug()<<"setLineEdit"<<endl;
+    ui->leDomicilio->setText(dom);
 }
 
-void Posicion::slot_procesarRespuesta(QNetworkReply * reply)
+void Posicion::actualizarPosicion()
 {
-    QImage im = QImage::fromData(reply->readAll());
-    ui->widget->setMapa(im);
-
-}
-
-void Posicion::slot_buscarMapa()
-{
-    QString a=QString::number(alt);
-    QString l=QString::number(lon);
-
-    manager->get(QNetworkRequest(QUrl("http://maps.google.com/maps/api/staticmap?center="+ a + " , " + l +"&zoom=15&size=512x512&maptype=roadmap&markers=color:red|label:A|"+ a + " , " + l +"&sensor=false&key=AIzaSyBCjEj35ftW_ZdpyvSgI2MNsaoVMmXKt9k")));
-
-    qDebug() << "SLOT BUSCAR MAPAAAAAAAAAAAAAAA";
-    qDebug() << a;
-    qDebug() << l;
-
-    float latitud = a.toFloat();
-    float longuitud = l.toFloat();
-
-    if(latitud!=0 && longuitud!=0)
+    qDebug()<<"ACTUALIZAR POSICION EN VENTANA"<<endl<<endl;
+    double a;
+    double b;
+    if(dsk)
     {
-        emit signal_coordenadas(latitud,longuitud);
+        a = posManager->getAltitud();
+        b = posManager->getLongitud();
+
+        qDebug()<<a;
+        qDebug()<<b;
     }
+    else
+    {
+        a = -31.4191074;
+        b = -64.1960073;
+    }
+    posManager->pedirDomicilio(a,b);
 }
 
-
-
-
-void Posicion::slot_setLineEdit(QString string)
-{
-    ui->leDomicilio->setText(string);
-}
-
-void Posicion::qDebug_gets()
-{
-//    QString domicilio = pm->getDomicilioActual();
-//    pm->setLatLongGPS(1.2312312,2.12312321);
-//    pm->setDomicilioActual("donato alvarez 7685");
-//    qDebug()<<"----------DOMICILIO ACTUAL--------------" << pm->getDomicilioActual();
-//    qDebug()<<"----------Lat and Long actual-----------"<< pm->getLatLongGPS();
-}
 
 

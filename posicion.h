@@ -5,13 +5,8 @@
 #include <QDebug>
 
 #include <QWidget>
-#include "myclass.h"
-#include "posmanager.h"
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include "mapas.h"
 
+#include "posmanagerv2.h"
 
 namespace Ui {
 class Posicion;
@@ -24,29 +19,18 @@ class Posicion : public QWidget
 public:
     explicit Posicion(QWidget *parent = 0);
     ~Posicion();
-    MyClass m;
 
-    double alt;
-    double lon;
+    //DECLARO UN OBJETO POSMANAGER
+    PosManagerV2 *posManager;
 
-    QNetworkAccessManager *manager;
-    Mapas * mapas;
-
-    PosManager *pm;
-
-private slots:
-    void positionUpdated(const QGeoPositionInfo &info);
-    void slot_procesarRespuesta(QNetworkReply * reply);
-    void slot_buscarMapa();
-
-    void slot_setLineEdit(QString);
-    void qDebug_gets();
+    bool dsk;
 
 private:
     Ui::Posicion *ui;
 
-signals:
-    void signal_coordenadas(float lt, float lg);
+private slots:
+    void setLineEdit(QString dom);
+    void actualizarPosicion();
 
 };
 

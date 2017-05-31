@@ -10,8 +10,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include "mapa.h"
-#include "myclass.h"
-#include "posmanager.h"
+#include "posmanagerv2.h"
 
 
 namespace Ui {
@@ -24,8 +23,8 @@ class Interfaz : public QWidget
 
 public:
     explicit Interfaz(QWidget *parent = 0);
-    MyClass m;
-
+    //MyClass m;
+    PosManagerV2 *posManager;
     void paintEvent(QPaintEvent *);
 
     double alt;
@@ -34,18 +33,15 @@ public:
     QNetworkAccessManager *manager;
     Mapa *mapas;
 
-    PosManager *pm;
-
 private  slots:
-    void slot_boton();
-    void slot_salir();
-    void positionUpdated(const QGeoPositionInfo &info);
-    void slot_procesarRespuesta(QNetworkReply * reply);
     void slot_buscarMapa();
+    void slot_domicilioYaObtenido(QString domicilio);
 
 private:
     Ui::Interfaz *ui;
     QImage imInterfaz;
+
+    void verMapaDondeEstoyParado();
 
 signals:
     void signal_coordenadas(float lt, float lg);

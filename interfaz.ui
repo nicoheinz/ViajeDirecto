@@ -23,17 +23,17 @@
     </rect>
    </property>
   </widget>
-  <widget class="Mapa" name="widget" native="true">
+  <widget class="Mapa" name="mapa" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>241</width>
-     <height>391</height>
+     <width>231</width>
+     <height>381</height>
     </rect>
    </property>
   </widget>
-  <zorder>widget</zorder>
+  <zorder>mapa</zorder>
   <zorder>Boton1</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

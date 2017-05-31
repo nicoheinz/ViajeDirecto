@@ -14,17 +14,16 @@ TEMPLATE = app
 
 SOURCES += \
     main.cpp \
-    posmanager.cpp \
     boton.cpp \
     interfaz.cpp \
-    mapa.cpp
+    mapa.cpp \
+    posmanagerv2.cpp
 
 HEADERS  += \
-    myclass.h \
-    posmanager.h \
     boton.h \
     interfaz.h \
-    mapa.h
+    mapa.h \
+    posmanagerv2.h
 
 FORMS    += \
     boton.ui \

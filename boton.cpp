@@ -9,14 +9,13 @@ Boton::Boton(QWidget *parent) :
     ui(new Ui::Boton)
 {
     ui->setupUi(this);
-    im1.load("../ViajeDirecto-master/escudo.png");
+    im1.load("../ViajeDirecto-copia/escudo.png");
 
     if(im1.isNull())
         printf("La imagen no se cargo");
     else
         printf("La imagen se carga");
 
-    qDebug()<<"botonnn";
 }
 
 Boton::~Boton()
@@ -32,6 +31,8 @@ void Boton::mousePressEvent(QMouseEvent *event)
 
     if(event->button()== Qt::RightButton)
          emit signal_salir();
+
+
 }
 
 
